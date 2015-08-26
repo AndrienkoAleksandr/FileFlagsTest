@@ -1,6 +1,10 @@
 package FileFlagsTest;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.attribute.PosixFilePermission;
+import java.nio.file.attribute.PosixFilePermissions;
+import java.util.Set;
 
 /**
  *
@@ -21,5 +25,10 @@ public class TestFileAttributes {
         perms &= file.setWritable(true, true);
 
         System.out.println("expected false: " + !perms);
+
+        Set<PosixFilePermission> permssions =
+                PosixFilePermissions.fromString("rw-------");
+
+        Files.setPosixFilePermissions(file.toPath(), permssions);
     }
 }
